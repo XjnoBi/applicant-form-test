@@ -56,6 +56,8 @@ const getNextId = (currentValues: Applicant[]) =>
 const Applicants: React.FC = () => {
   const [saveDialogFlags, setSaveDialogFlags] =
     React.useState(DEFAULT_DIALOG_FLAGS)
+  const [resetDialogFlags, setResetDialogFlags] =
+    React.useState(DEFAULT_DIALOG_FLAGS)
 
   const onSubmit = async () => {
     //TODO: call APi service here...
@@ -105,6 +107,11 @@ const Applicants: React.FC = () => {
           }, 2000)
         }
 
+        const handleResetForm = () => {
+          setResetDialogFlags(DEFAULT_DIALOG_FLAGS)
+          resetForm()
+        }
+
         return (
           <Page title='Applicant'>
             <Box padding='0 1rem'>
@@ -122,7 +129,13 @@ const Applicants: React.FC = () => {
               ))}
             </form>
             <Footer>
-              <Button onClick={() => resetForm()}>reset</Button>
+              <Button
+                onClick={() =>
+                  setResetDialogFlags({ ...resetDialogFlags, isOpen: true })
+                }
+              >
+                reset
+              </Button>
               <Flexbox alignItems='baseline'>
                 {Object.keys(errors).length > 0 &&
                   !values.some((i) => i.isPrimary) && (
@@ -145,6 +158,13 @@ const Applicants: React.FC = () => {
                 </Button>
               </Flexbox>
             </Footer>
+            <ConfirmDialog
+              isOpen={resetDialogFlags.isOpen}
+              onCancel={() => setResetDialogFlags(DEFAULT_DIALOG_FLAGS)}
+              onConfirm={handleResetForm}
+            >
+              Are you sure you want to reset? Data will be lost permanently.
+            </ConfirmDialog>
             <ConfirmDialog
               isOpen={saveDialogFlags.isOpen}
               onCancel={() => setSaveDialogFlags(DEFAULT_DIALOG_FLAGS)}

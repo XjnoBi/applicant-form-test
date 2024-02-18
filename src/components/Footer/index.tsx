@@ -19,6 +19,7 @@ const StyledFlexbox = styled(Flexbox)`
   left: 0;
   padding: 0.6rem 2rem;
   width: 100%;
+  z-index: 500;
 `
 
 export default Footer

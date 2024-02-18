@@ -37,9 +37,15 @@ const StyledButton = styled.button<Omit<Props, 'children'>>`
           background-color: ${p.theme.colors.white};
           color: ${p.theme.colors.primary};
 
-          &:hover {
-            background-color: rgba(${hexToRgb(p.theme.colors.primary)[0]}, 0.1);
-          }
+          ${!p.disabled &&
+          css`
+            &:hover {
+              background-color: rgba(
+                ${hexToRgb(p.theme.colors.primary)[0]},
+                0.1
+              );
+            }
+          `}
         `
       case ButtonVariants.outline:
         return css`
@@ -47,9 +53,15 @@ const StyledButton = styled.button<Omit<Props, 'children'>>`
           background-color: ${p.theme.colors.white};
           color: ${p.theme.colors.primary};
 
-          &:hover {
-            background-color: rgba(${hexToRgb(p.theme.colors.primary)[0]}, 0.1);
-          }
+          ${!p.disabled &&
+          css`
+            &:hover {
+              background-color: rgba(
+                ${hexToRgb(p.theme.colors.primary)[0]},
+                0.1
+              );
+            }
+          `}
         `
       case ButtonVariants.primary:
         return css`
